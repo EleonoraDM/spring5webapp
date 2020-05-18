@@ -33,18 +33,18 @@ public class BootStrapData implements CommandLineRunner {
 
         System.out.println("Publisher count: " + publisherRepository.count());
 
-
         Author joe = new Author("Joe", "Hill");
         Book horns = new Book("Horns", "123123");
 
         joe.getBooks().add(horns);
         horns.getAuthors().add(joe);
 
-        this.authorRepository.save(joe);
-        this.bookRepository.save(horns);
-
         horns.setPublisher(publisher);
         publisher.getBooks().add(horns);
+
+        this.authorRepository.save(joe);
+        this.bookRepository.save(horns);
+        this.publisherRepository.save(publisher);
 
         Author stephen = new Author("Stephen", "King");
         Book firestarter = new Book("Firestarter", "456456");
@@ -57,6 +57,7 @@ public class BootStrapData implements CommandLineRunner {
 
         this.authorRepository.save(stephen);
         this.bookRepository.save(firestarter);
+        this.publisherRepository.save(publisher);
 
         System.out.println("Number of books: " + this.bookRepository.count());
         System.out.println("Publisher Number of Books: " + publisher.getBooks().size());
